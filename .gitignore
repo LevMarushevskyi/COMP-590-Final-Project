@@ -111,3 +111,7 @@ InitTestScene*.unity*
 
 # ProBuilder per-user editor preferences (last shape, select mode, etc.)
 /[Pp]roject[Ss]ettings/Packages/com.unity.probuilder/Settings.json
+
+# Meta XR SDK regenerates these on every build/play; don't track them
+/RuntimeActionBindings.json
+/[Aa]ssets/[Ss]treaming[Aa]ssets/RuntimeActionBindings.json*
