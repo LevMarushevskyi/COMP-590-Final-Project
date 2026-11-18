@@ -108,3 +108,6 @@ InitTestScene*.unity*
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
 .DS_Store
+
+# ProBuilder per-user editor preferences (last shape, select mode, etc.)
+/[Pp]roject[Ss]ettings/Packages/com.unity.probuilder/Settings.json
