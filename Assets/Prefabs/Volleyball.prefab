@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7367555683688121718}
   - component: {fileID: 3249499866015237232}
   - component: {fileID: 5416774629823777909}
+  - component: {fileID: 6364256956238043958}
   m_Layer: 8
   m_Name: Volleyball
   m_TagString: Untagged
@@ -273,3 +274,15 @@ MonoBehaviour:
   m_MaxAngularVelocityDelta: 20
   rackSpot: {fileID: 0}
   returnDelay: 6
+--- !u!114 &6364256956238043958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5387717367754022700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0bf779da4761431ea72f746d725b122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Volleyball
