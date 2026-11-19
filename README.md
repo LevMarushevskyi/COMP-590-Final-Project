@@ -1,5 +1,8 @@
-Team: Lev marushevskyi, Jace Rea, George Sexsmith
-Video: https://youtu.be/0hlTkrSx0yc
+## Team: 
+Lev marushevskyi, Jace Rea, George Sexsmith
+
+## Video:
+https://youtu.be/0hlTkrSx0yc
 
 ## Assets
 Volleyball asset https://assetstore.unity.com/packages/3d/props/free-sport-balls-293937
