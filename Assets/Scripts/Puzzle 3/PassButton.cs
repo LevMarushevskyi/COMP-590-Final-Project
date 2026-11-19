@@ -2,14 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR;
 
-/// <summary>
-/// The timed forearm pass. Pulling either trigger "puts your arms out" for Timing Window
-/// seconds; the first free ball that comes within Contact Radius of your forearms is passed
-/// toward where you're facing. Facing within Aim Assist Angle of the hoop sends it to the hoop.
-/// Pressing right as the ball arrives (within Perfect Window) is dead on; pressing early adds
-/// up to Max Aim Error meters of miss. In the Editor, P also passes (Space is used by the
-/// XR Interaction Simulator).
-/// </summary>
 public class PassButton : MonoBehaviour
 {
     [Header("Where it works")]
@@ -46,9 +38,6 @@ public class PassButton : MonoBehaviour
     [SerializeField] float maxAimError = 1.2f;
 
     [Header("Feedback (optional)")]
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip passClip;
-    [SerializeField] AudioClip whiffClip;
     [Range(0f, 1f)] [SerializeField] float hapticAmplitude = 0.7f;
     [SerializeField] float hapticDuration = 0.12f;
     [Tooltip("Optional 'arms' visual shown at the forearm spot for a moment on each press.")]
@@ -63,7 +52,6 @@ public class PassButton : MonoBehaviour
 
     void Awake()
     {
-        if (audioSource == null) audioSource = GetComponent<AudioSource>();
         if (platformVisual != null) platformVisual.SetActive(false);
 
         action = passAction.action;
@@ -125,7 +113,6 @@ public class PassButton : MonoBehaviour
         else if (sinceArmed > timingWindow)
         {
             armed = false;
-            Play(whiffClip);
             GameManager.Say("Whiff! Time it as the ball reaches you.");
         }
     }
@@ -174,8 +161,6 @@ public class PassButton : MonoBehaviour
         }
         else target = from + forward * freePassDistance + Vector3.up * freePassHeight;
 
-        // secondsAfterPress = how long the arms were out before the ball arrived.
-        // Pressed right as it arrived = perfect; the earlier the press, the bigger the miss.
         bool perfect = secondsAfterPress <= perfectWindow;
         float error = perfect ? 0f : Mathf.InverseLerp(perfectWindow, timingWindow, secondsAfterPress) * maxAimError;
         Vector2 miss = Random.insideUnitCircle.normalized * error;
@@ -189,7 +174,6 @@ public class PassButton : MonoBehaviour
         ball.Body.angularVelocity = Vector3.Cross(Vector3.up, velocity.normalized) * -3f; // a little backspin
         ball.MarkPassed();
 
-        Play(passClip);
         Buzz();
         if (perfect) GameManager.Say(assisted ? "Perfect timing!" : "Perfect timing! Face the hoop to aim.");
         else GameManager.Say("A little early...");
@@ -214,11 +198,6 @@ public class PassButton : MonoBehaviour
         var device = InputDevices.GetDeviceAtXRNode(node);
         if (device.isValid && device.TryGetHapticCapabilities(out var caps) && caps.supportsImpulse)
             device.SendHapticImpulse(0, hapticAmplitude, hapticDuration);
-    }
-
-    void Play(AudioClip clip)
-    {
-        if (audioSource != null && clip != null) audioSource.PlayOneShot(clip);
     }
 
     void OnDrawGizmosSelected()

@@ -5,11 +5,6 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public enum BallTouch { None, Held, Thrown, Launched, Passed }
 
-/// <summary>
-/// Remembers how a ball was last touched (held, thrown, fired by the machine, or passed)
-/// and keeps a list of every enabled ball. Puzzle 3 uses this to tell a real pass
-/// from a catch-and-throw. Works alongside RackVolleyball (or any XRGrabInteractable).
-/// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class Volleyball : MonoBehaviour
 {

@@ -1,9 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// Keeps a world-space text or panel floating in front of the player's eyes and
-/// turned to face them. Eases toward its spot so it doesn't feel glued to the head.
-/// </summary>
 public class FollowHead : MonoBehaviour
 {
     [SerializeField] float distance = 1.5f;
@@ -47,6 +43,5 @@ public class FollowHead : MonoBehaviour
         return head.position + flat.normalized * distance + Vector3.up * heightOffset;
     }
 
-    // TextMeshPro reads correctly when its forward points away from the viewer.
     void Face() => transform.rotation = Quaternion.LookRotation(transform.position - head.position, Vector3.up);
 }

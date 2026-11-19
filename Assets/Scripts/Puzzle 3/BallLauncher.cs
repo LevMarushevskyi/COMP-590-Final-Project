@@ -1,12 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// The serve-receive ball machine. While launching, fires a ball every Interval seconds
-/// on a projectile arc that arrives at the player's forearms after Flight Time seconds.
-/// Uses a small pool of balls so the floor never fills up. Never takes back a held ball.
-/// Hook StartLaunching / StopLaunching to the passing spot's PlayerZone events.
-/// </summary>
 public class BallLauncher : MonoBehaviour
 {
     [Header("Setup")]
@@ -37,11 +31,7 @@ public class BallLauncher : MonoBehaviour
     [SerializeField] float recycleAfter = 7f;
 
     [Header("Feedback (optional)")]
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip launchClip;
     [SerializeField] ParticleSystem launchPuff;
-
-    public bool IsLaunching => launching && !shutDown;
 
     readonly List<Volleyball> pool = new List<Volleyball>();
     bool launching, shutDown;
@@ -50,7 +40,6 @@ public class BallLauncher : MonoBehaviour
 
     void Awake()
     {
-        if (audioSource == null) audioSource = GetComponent<AudioSource>();
         if (muzzle == null) muzzle = transform;
         if (ballPrefab == null)
         {
@@ -78,7 +67,6 @@ public class BallLauncher : MonoBehaviour
 
     public void StopLaunching() => launching = false;
 
-    /// <summary>Stops the machine for good (puzzle solved).</summary>
     public void Shutdown()
     {
         shutDown = true;
@@ -128,7 +116,6 @@ public class BallLauncher : MonoBehaviour
         ball.MarkLaunched();
 
         if (launchPuff != null) launchPuff.Play();
-        if (audioSource != null && launchClip != null) audioSource.PlayOneShot(launchClip);
     }
 
     Volleyball NextBall()
@@ -141,7 +128,7 @@ public class BallLauncher : MonoBehaviour
             if (b.IsHeld) continue;
             if (oldest == null || b.LastTouchTime < oldest.LastTouchTime) oldest = b;
         }
-        return oldest; // every ball is out: reuse the one untouched the longest
+        return oldest;
     }
 
     void RecycleLooseBalls()

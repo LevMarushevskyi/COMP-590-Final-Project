@@ -3,10 +3,6 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-/// <summary>
-/// A grabbable jersey with a number. Lock() removes every interaction layer except
-/// "Jersey", so hands (Default) can no longer grab it but the socket keeps holding it.
-/// </summary>
 [RequireComponent(typeof(XRGrabInteractable))]
 public class Jersey : MonoBehaviour
 {
@@ -34,7 +30,6 @@ public class Jersey : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    // Update the labels in the editor when Number changes (delayed to avoid OnValidate warnings).
     void OnValidate()
     {
         UnityEditor.EditorApplication.delayCall += () => { if (this != null) RefreshLabels(); };
@@ -48,7 +43,6 @@ public class Jersey : MonoBehaviour
             if (label != null) label.text = number.ToString();
     }
 
-    /// <summary>Stops hands from grabbing this jersey. The socket holding it keeps it.</summary>
     public void Lock()
     {
         if (IsLocked) return;

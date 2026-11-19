@@ -1,12 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// Fires events when the player's head (Main Camera) moves into or out of this box,
-/// looking from above (height is ignored). Works with teleporting, because it checks
-/// the head position every frame instead of relying on physics.
-/// The BoxCollider only defines the area; it's switched off so it never blocks balls or rays.
-/// </summary>
 [RequireComponent(typeof(BoxCollider))]
 public class PlayerZone : MonoBehaviour
 {

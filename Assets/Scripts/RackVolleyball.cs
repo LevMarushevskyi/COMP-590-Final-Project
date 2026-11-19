@@ -21,7 +21,6 @@ public class RackVolleyball : XRGrabInteractable
     protected override void OnSelectEntering(SelectEnterEventArgs args)
     {
         returnAt = float.PositiveInfinity;
-        // XRI restores the pre-grab body state on release and applies the controller velocity.
         ball.isKinematic = false;
         base.OnSelectEntering(args);
     }

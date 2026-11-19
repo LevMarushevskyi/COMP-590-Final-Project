@@ -1,6 +1,5 @@
 using UnityEngine;
 
-/// <summary>Scores throws from the scene's rack ball against the two target triggers.</summary>
 [RequireComponent(typeof(Volleyball))]
 public class RackBallTargets : MonoBehaviour
 {
